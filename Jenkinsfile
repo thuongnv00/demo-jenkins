@@ -12,13 +12,14 @@ pipeline {
 				withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
 				sh 'docker build -t kenshinthuong/demo_jenkins_docker:v1 .'
 				sh 'docker push kenshinthuong/demo_jenkins_docker:v1'
+				
 				}
 			}
 		}
-		stage('Run container in docker') {
+		stage('Run container in Kubernetes') {
 			steps{
-				echo 'Docker ...............................'
-				sh 'docker run --name demo_jenkins -p 8085:8085 -h demo kenshinthuong/demo_jenkins_docker:v1'
+				echo 'Kubernetes ...............................'
+				sh 'kubectl apply –f bwce_jenkins.yaml'
 			}
 		}
 		
