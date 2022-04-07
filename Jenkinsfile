@@ -19,7 +19,9 @@ pipeline {
 		stage('Run container in Kubernetes') {
 			steps{
 				echo 'Kubernetes ...............................'
-				sh 'kubectl apply –f bwce_jenkins.yaml'
+				script {
+					kubernetesDeploy(configs: "bwce_jenkins.yaml",kubeconfigId:"kubernetes")
+				}
 			}
 		}
 		
