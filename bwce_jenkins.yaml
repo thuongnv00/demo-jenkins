@@ -31,5 +31,5 @@ spec:
     ports:
     - port: 8085
       targetPort: 8085
-      nodePort: 32002
+      nodePort: 32009
 
