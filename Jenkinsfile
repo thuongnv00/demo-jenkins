@@ -8,7 +8,6 @@ pipeline {
 		}
 		stage('Docker build and push') {
 			steps{
-			echo 'Success ...............................'
 				withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
 				sh 'docker build -t kenshinthuong/demo_jenkins_docker:v1 .'
 				sh 'docker push kenshinthuong/demo_jenkins_docker:v1'
@@ -16,15 +15,5 @@ pipeline {
 				}
 			}
 		}
-		stage('Run container in Kubernetes') {
-			steps{
-				echo 'Kubernetes ...............................'
-				script {
-					kubernetesDeploy(configs: "bwce_jenkins.yaml",kubeconfigId:"kubernetes")
-				}
-			}
-		}
-		
-	
 	}
 }
